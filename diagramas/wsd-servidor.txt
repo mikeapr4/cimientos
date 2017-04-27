@@ -1,0 +1,28 @@
+participant "guarderiaAnimales.js" as gj
+participant "GuarderiaController.java" as gc
+participant "Gato" as ent
+participant "GuarderiaService.java" as gs
+participant "VeterinariaDAO.java" as vd
+participant "JDBCConnection.java" as jdbc
+participant "Statement" as stmt
+
+gj->gc: POST /guarderia/gato?nombre=luna {name: 'alvaro'}
+note left of gc
+ahora la peticion se converte en un 
+"String" y un objeto, "User".
+end note
+gc->ent: new Gato(nombreDelGato)
+gc->gs: saveAnimal(gato)
+gs->vd: save(animal)
+vd->jdbc: connectToDatabase()
+note left of jdbc
+creamos una "Connection" y
+después una "Statement".
+end note
+vd->ent: getNombre()...
+vd->stmt: executeUpdate(queryToExecute)
+vd->jdbc: closeConnectionToDatabase(con)
+gc->gc: sonidoConUser(gato, duenio)
+gc->ent: setDuenio(duenio)
+gc->ent: emitirSonido()
+gc->gj: "luna dice Miau. Mi dueño ..."
