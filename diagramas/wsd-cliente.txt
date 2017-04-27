@@ -1,0 +1,24 @@
+participant "Navegador" as n
+participant "guarderiaAnimales.html" as gh
+participant "guarderiaAnimales.js" as gj
+participant "GuarderiaController.java" as gc
+
+n->gh: Cambia GET a POST
+gh->gj: datosDuenio()
+gj->gh: document.getElementsByTagName("select")[0].value
+gj->gh: document.getElementById("datosDuenio").class
+n->gh: Escribe nombre mascota "luna"
+n->gh: Escribe nombre dueno "alvaro"
+n->gh: Hace clic "agregar gato"
+gh->gj: nuevoGato()
+gj->gj: endpointAnimal("gato")
+gj->gj: tomarNombreAnimal()
+gj->gh: document.getElementById("nombreAnimal").value
+gj->gj: tomarNombreDuenio()
+gj->gh: document.getElementById("datosDuenio")...(...).value
+gj->gc: POST /guarderia/gato?nombre=luna {name: 'alvaro'}
+gc->gj: "luna dice Miau. Mi dueño ..."
+gj->gj: agregarSonidoDeAnimal(request.responseText)
+gj->gh: document.getElementById("sonidosAnimales")
+gj->gh: document.createElement("div")
+gj->gh: document.createTextNode(sonido)
