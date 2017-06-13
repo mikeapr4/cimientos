@@ -1,0 +1,87 @@
+HTML
+    index.html (login)
+    pantalla2.html (form leer / crear)
+    pantalla3.html (ing leer / crear)
+
+BBDD
+    formulario, ingresos, categoria, usuario
+
+Javascript
+    usuario.js
+        XHR Post x2
+            validacion 
+            redireccion a pantalla2 (con ID usuario)
+
+    pant2.js
+        crear formulario
+            lee input
+            crear elementos
+            validacion
+            POST            (recibir array de objetos)
+        leer formularios
+            GET
+            crear elementos
+
+    pant3.js
+        crear y leer (igual a pant2.js)
+
+
+Controller
+    Usuario
+        getUsuario
+            validacion / transformacion
+            llamar al service
+
+        crearUsuario
+            validacion / transformacion
+            llamar al service
+
+    Formulario
+        ???
+
+    Ingreso
+        ???
+
+Service
+    Usuario
+        getUsuario
+            llamar buscarFilaConEmailYClave
+            devolver el ID o error (-1)
+
+        crearUsuario (int)
+            if (existeFilaConEmail(email)) {
+                return -1 
+            }
+            insertarFila
+            buscarUltimaID
+            devolver el ID
+
+    Formulario
+        ???
+
+    Ingreso
+        ???
+
+DAO
+    Usuario
+        buscarFilaConEmailYClave (int)
+            SELECT id FROM usuario WHERE email ... 
+            if (rs.next())
+                return rs.getInt('id')
+            else
+                return 
+        existeFilaConEmail (boolean)
+            SELECT count(*)
+        insertarFila (parametros - email, clave, nombre, devuelve - ???)
+            INSERT INTO usuario (email, clave, nombre) VALUES (...)
+        buscarUltimaID
+            SELECT id FROM usuario
+            if (rs.last()) {
+                int id = rs.getInt('id');
+            }
+        
+    Formulario
+        ???
+
+    Ingreso
+        ???
